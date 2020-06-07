@@ -101,7 +101,13 @@ class ListsSuite {
     assert(max(List(3, 7, 2)) == 7)
   }
 
+  @Test def `sum of a empty list (10pts)`: Unit = {
+    assert(sum(List()) == 0)
+  }
 
+  @Test def `max of a empty list (10pts)`: Unit = {
+    assert(sum(List()) == Int.MinValue)
+  }
 
   @Rule def individualTestTimeout = new org.junit.rules.Timeout(1000)
 }
