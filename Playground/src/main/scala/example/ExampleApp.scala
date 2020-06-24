@@ -3,16 +3,41 @@ package example
 import empties._
 
 object ExampleApp {
-  def main(args: Array[String]): Unit = {
-    val t1 = new NonEmpty(3, Empty, Empty)
-    t1.incl(4)
-    t1.incl(2)
-    println(t1)
 
-    def nth[T](n: Int, xs: List[T]): T =
-      if (xs.isEmpty) throw new IndexOutOfBoundsException
-      else if (n == 0) xs.head
-      else nth(n-1, xs.tail)
+  abstract class Nat {
+    def isZero: Boolean
+    def predecessor: Nat
+    def successor: Nat
+    def + (that: Nat): Nat
+    def - (that: Nat): Nat
+  }
+
+  object Zero extends Nat {
+    override def isZero: Boolean = true
+
+    override def predecessor: Nat = throw new IllegalStateException("Zero have no predecessor")
+
+    override def successor: Nat = new Succ(this)
+
+    override def + (that: Nat): Nat = if (!that.isZero) new Succ(this) + that.predecessor else this
+
+    override def -(that: Nat): Nat = if (!that.isZero) throw new IllegalArgumentException("Negative") else this
+
+  }
+  class Succ(n: Nat) extends Nat {
+    override def isZero: Boolean = false
+
+    override def predecessor: Nat = n
+
+    override def successor: Nat = new Succ(this)
+
+    override def + (that: Nat): Nat = this.successor + that.predecessor
+
+    override def -(that: Nat): Nat = if (!that.isZero) if (!this.isZero) this.predecessor - that.predecessor else throw new IllegalArgumentException("Negative") else this
+  }
+
+  def main(args: Array[String]): Unit = {
+
   }
 }
 
