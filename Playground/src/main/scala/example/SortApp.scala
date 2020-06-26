@@ -1,7 +1,7 @@
 package example
 
 
-object Main extends App {
+object SortApp extends App {
   var anyList: List[Any] = List(1, "siema", List(1, 0))
 
   def show(list: List[Any]): Unit = {

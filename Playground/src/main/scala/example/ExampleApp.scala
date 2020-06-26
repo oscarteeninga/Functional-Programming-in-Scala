@@ -1,7 +1,5 @@
 package example
 
-import empties._
-
 object ExampleApp {
 
   abstract class Nat {
@@ -19,7 +17,7 @@ object ExampleApp {
 
     override def successor: Nat = new Succ(this)
 
-    override def + (that: Nat): Nat = if (!that.isZero) new Succ(this) + that.predecessor else this
+    override def +(that: Nat): Nat = if (!that.isZero) new Succ(this) + that.predecessor else this
 
     override def -(that: Nat): Nat = if (!that.isZero) throw new IllegalArgumentException("Negative") else this
 
@@ -31,7 +29,7 @@ object ExampleApp {
 
     override def successor: Nat = new Succ(this)
 
-    override def + (that: Nat): Nat = this.successor + that.predecessor
+    override def +(that: Nat): Nat = this.successor + that.predecessor
 
     override def -(that: Nat): Nat = if (!that.isZero) if (!this.isZero) this.predecessor - that.predecessor else throw new IllegalArgumentException("Negative") else this
   }
