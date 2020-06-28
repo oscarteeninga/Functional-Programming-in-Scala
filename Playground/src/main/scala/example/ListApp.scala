@@ -53,7 +53,6 @@ object ListApp extends App {
     case x => x :: flatten(xs.tail)
   } else List()
 
-  def mergesort()
   println(flatten(List(1, List(2, 3), List(List(4, 5), 6), List(List(List(7))))))
 
   var time = System.nanoTime()
@@ -62,5 +61,8 @@ object ListApp extends App {
   time = System.nanoTime()
   println(list.length)
   println("Time: " + (System.nanoTime() - time))
+
+  println((1 to 20) filter (_ > 10))
+
 
 }
